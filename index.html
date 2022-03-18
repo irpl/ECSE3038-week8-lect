@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Fruits</title>
+  </head>
+  <body>
+    <!-- <fruit-card name="jim"></fruit-card> -->
+    <script>
+      window.onload = function () {
+        fetch("http://localhost:3001/fruit")
+          .then((res) => res.json())
+          .then((fruits) => {
+            console.log(fruits);
+            var body = document.querySelector("body");
+
+            fruits.forEach((fruit) => {
+              console.log(fruit._id["$oid"]);
+              var fruitCard = document.createElement("fruit-card");
+              fruitCard.setAttribute("fruit_id", fruit._id["$oid"]);
+              fruitCard.setAttribute("name", fruit.name);
+              fruitCard.setAttribute("sugar", fruit.sugar_content);
+              fruitCard.setAttribute("calories", fruit.calories);
+              fruitCard.setAttribute("colour", fruit.colour);
+              fruitCard.setAttribute("image", "https://image.sciencenorway.no/1438480.jpg?imageId=1438480&width=1058&height=604");
+              body.appendChild(fruitCard);
+            });
+          });
+      };
+    </script>
+    <script src="Fruits/fruit-card.js"></script>
+  </body>
+</html>
